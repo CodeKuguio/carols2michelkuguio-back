@@ -4,6 +4,6 @@ import { HonorController } from './honor.controller';
 
 @Module({
   controllers: [HonorController],
-  providers: [HonorService, PrismaService],
+  providers: [HonorService],
 })
 export class HonorModule {}
