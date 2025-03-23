@@ -12,9 +12,9 @@ export class InviteController {
     return this.inviteService.create(createInviteDto);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.inviteService.findOne(+id);
+  @Get(':phone')
+  findOne(@Param('phone') phone: string) {
+    return this.inviteService.findOne(phone);
   }
 
   @Patch(':id')

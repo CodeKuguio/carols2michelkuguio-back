@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   postgres:
     image: postgres:15 # Versão do PostgreSQL (altere se necessário, ex: 14, 13, etc.)

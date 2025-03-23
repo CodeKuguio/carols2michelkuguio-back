@@ -12,7 +12,7 @@ export class HonorRepository {
     return honors.map((honor) => new HonorEntity(honor));
   }
 
-  async create(data: Prisma.HonorCreateManyInput): Promise<HonorEntity[]> {
+  async create(data: Prisma.HonorCreateManyInput[]): Promise<HonorEntity[]> {
     const honors = await this.prisma.honor.createManyAndReturn({ data });
     return honors.map((honor) => new HonorEntity(honor));
   }

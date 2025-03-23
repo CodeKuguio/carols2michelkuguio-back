@@ -19,12 +19,6 @@ async function bootstrap() {
     .setTitle('Carolina e Michel Kuguio')
     .setDescription('Aplicação Backend Carolina e Michel Kuguio')
     .setVersion('1.0')
-    .addTag('Convidados')
-    .addTag('Convidados de Honra')
-    .addTag('Honras')
-    .addTag('Convites')
-    .addTag('Presentes')
-    .addTag('Mensagens')
     .build();
 
   const port = configService.get<number>('PORT') || 3000;

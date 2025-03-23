@@ -16,6 +16,7 @@ datasource db {
 model Invite {
   id    Int    @id @default(autoincrement())
   users User[]
+  title String
   confirmation Boolean?
   expirationDate DateTime
 }

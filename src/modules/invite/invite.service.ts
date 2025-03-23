@@ -1,26 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { CreateInviteDto } from './dto/create-invite.dto';
 import { UpdateInviteDto } from './dto/update-invite.dto';
+import { InviteRepository } from './invite.repository';
 
 @Injectable()
 export class InviteService {
-  create(createInviteDto: CreateInviteDto) {
-    return 'This action adds a new invite';
+  constructor(private readonly inviteRepository: InviteRepository) {
   }
-
-  findAll() {
-    return `This action returns all invite`;
+  async create(createInviteDto: CreateInviteDto) {
+    return this.inviteRepository.create(createInviteDto);
   }
-
-  findOne(id: number) {
-    return `This action returns a #${id} invite`;
+  findOne(phone: string) {
+    return this.inviteRepository.findOne(phone);
   }
 
   update(id: number, updateInviteDto: UpdateInviteDto) {
-    return `This action updates a #${id} invite`;
+    return this.inviteRepository.update(id, updateInviteDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} invite`;
-  }
 }

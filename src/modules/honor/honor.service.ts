@@ -1,18 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../../prisma.service';
 import { Honor, Prisma } from '@prisma/client';
+import { HonorRepository } from './honor.repository';
 
 @Injectable()
 export class HonorService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private honorRepository: HonorRepository) {}
 
-  async create(data: Prisma.HonorCreateInput): Promise<Honor> {
-    return this.prisma.honor.create({
-      data,
-    });
+  async create(data: Prisma.HonorCreateInput[]): Promise<Honor[]> {
+    return this.honorRepository.create(data);
   }
 
   async findAll(): Promise<Honor[]> {
-    return this.prisma.honor.findMany();
+    return this.honorRepository.findAll();
   }
 }
