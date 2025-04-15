@@ -19,6 +19,10 @@ async function bootstrap() {
     .setTitle('Carolina e Michel Kuguio')
     .setDescription('Aplicação Backend Carolina e Michel Kuguio')
     .setVersion('1.0')
+    .addBearerAuth(
+      { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
+      'access-token',
+    ) // Adiciona suporte para Bearer Token no Swagger
     .build();
 
   const port = configService.get<number>('PORT') || 3000;
@@ -26,6 +30,12 @@ async function bootstrap() {
 
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup(apiPrefix, app, documentFactory);
+
+  app.enableCors({
+    origin: '*', // Permite qualquer origem, mas você pode especificar URLs específicas
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS', // Métodos permitidos
+    allowedHeaders: 'Content-Type, Authorization', // Cabeçalhos permitidos na requisição
+  });
 
   app.useGlobalPipes(
     new ValidationPipe({

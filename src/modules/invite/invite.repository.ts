@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateInviteDto } from './dto/create-invite.dto';
 import { UpdateInviteDto } from './dto/update-invite.dto';
 import { PrismaService } from '../../prisma.service';
@@ -36,10 +36,10 @@ export class InviteRepository {
     });
   }
 
-  findOne(phone: string) {
+  async findOne(phone: string) {
     const sanitizedPhone = phone.replace(/\D/g, '');
 
-    return this.prisma.invite.findFirst({
+    const invite = await this.prisma.invite.findFirst({
       where: {
         users: {
           some: {
@@ -58,6 +58,14 @@ export class InviteRepository {
         },
       },
     });
+
+    if (!invite) {
+      throw new NotFoundException(
+        `Não encontramos nenhum convite associado ao telefone "${sanitizedPhone}"`,
+      );
+    }
+
+    return invite;
   }
 
   update(id: number, updateInviteDto: UpdateInviteDto) {

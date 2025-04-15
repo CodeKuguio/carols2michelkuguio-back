@@ -1,9 +1,12 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { HonorService } from './honor.service';
 import { CreateHonorDto } from './dto/create-honor.dto';
-import { ApiBody } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody } from '@nestjs/swagger';
+import { AuthGuard } from '../auth/auth.guard';
 
 @Controller('honor')
+@UseGuards(AuthGuard)
+@ApiBearerAuth('access-token')
 export class HonorController {
   constructor(private readonly honorService: HonorService) {}
 
