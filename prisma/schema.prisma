@@ -17,6 +17,7 @@ model Invite {
   id    Int    @id @default(autoincrement())
   users User[]
   title String
+  uuid String @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
   confirmation Boolean?
   expirationDate DateTime
 }

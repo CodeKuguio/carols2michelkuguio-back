@@ -29,6 +29,11 @@ export class InviteController {
     return this.inviteService.findOne(phone);
   }
 
+  @Get('/uuid/:uuid')
+  findOneByUUID(@Param('uuid') uuid: string) {
+    return this.inviteService.findOneByUUID(uuid);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateInviteDto: UpdateInviteDto) {
     return this.inviteService.update(+id, updateInviteDto);

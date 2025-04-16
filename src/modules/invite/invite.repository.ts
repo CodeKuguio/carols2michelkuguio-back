@@ -67,6 +67,28 @@ export class InviteRepository {
 
     return invite;
   }
+  async findOneByUUID(uuid: string) {
+    const invite = await this.prisma.invite.findFirst({
+      where: {
+        uuid: uuid,
+      },
+      include: {
+        users: {
+          include: {
+            honor: true,
+          },
+        },
+      },
+    });
+
+    if (!invite) {
+      throw new NotFoundException(
+        `Não encontramos nenhum convite`,
+      );
+    }
+
+    return invite;
+  }
 
   update(id: number, updateInviteDto: UpdateInviteDto) {
     let { users, confirmation } = updateInviteDto;
